@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TextInput, Button, View } from "react-native";
+import { StyleSheet, TextInput, Button, View, Alert } from "react-native";
 
 export interface AddTodoProps {
   submitHandler: Function;
@@ -12,18 +12,26 @@ const AddTodo: React.FC<AddTodoProps> = ({ submitHandler }) => {
     setText(value);
   };
 
+  const onPressHandler = () => {
+    if (text.length > 3) {
+      submitHandler(text);
+      setText("");
+    } else {
+      Alert.alert("OOPS!", "You have to write at least 3 letters", [
+        { text: "Ok", onPress: () => console.log("Ok button pressed") }
+      ]);
+    }
+  };
+
   return (
     <View>
       <TextInput
         style={styles.input}
         placeholder="new todo..."
+        value={text}
         onChangeText={changeHandler}
       />
-      <Button
-        onPress={() => submitHandler(text)}
-        title="add todo"
-        color="coral"
-      />
+      <Button onPress={onPressHandler} title="add todo" color="coral" />
     </View>
   );
 };
