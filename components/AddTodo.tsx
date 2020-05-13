@@ -30,6 +30,7 @@ const AddTodo: React.FC<AddTodoProps> = ({ submitHandler }) => {
         placeholder="new todo..."
         value={text}
         onChangeText={changeHandler}
+        onSubmitEditing={onPressHandler}
       />
       <Button onPress={onPressHandler} title="add todo" color="coral" />
     </View>
